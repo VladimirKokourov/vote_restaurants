@@ -10,7 +10,7 @@ import ru.vkokourov.vote_restaurants.model.User;
 import ru.vkokourov.vote_restaurants.repository.UserRepository;
 import ru.vkokourov.vote_restaurants.to.UserTo;
 import ru.vkokourov.vote_restaurants.util.JsonUtil;
-import ru.vkokourov.vote_restaurants.util.UsersUtil;
+import ru.vkokourov.vote_restaurants.util.UserUtil;
 import ru.vkokourov.vote_restaurants.web.AbstractControllerTest;
 
 import static org.hamcrest.Matchers.containsString;
@@ -58,7 +58,7 @@ class ProfileControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        USER_MATCHER.assertMatch(userRepository.getExisted(USER_ID), UsersUtil.updateFromTo(new User(user), updatedTo));
+        USER_MATCHER.assertMatch(userRepository.getExisted(USER_ID), UserUtil.updateFromTo(new User(user), updatedTo));
     }
 
     @Test
@@ -86,7 +86,7 @@ class ProfileControllerTest extends AbstractControllerTest {
     @Test
     void register() throws Exception {
         UserTo newTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword");
-        User newUser = UsersUtil.createNewFromTo(newTo);
+        User newUser = UserUtil.createNewFromTo(newTo);
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newTo)))

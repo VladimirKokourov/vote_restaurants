@@ -6,8 +6,7 @@ import ru.vkokourov.vote_restaurants.model.User;
 import ru.vkokourov.vote_restaurants.to.UserTo;
 
 @UtilityClass
-public class UsersUtil {
-    public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+public class UserUtil {
 
     public static User createNewFromTo(UserTo userTo) {
         return new User(null, userTo.getName(), userTo.getEmail().toLowerCase(), userTo.getPassword(), Role.USER);

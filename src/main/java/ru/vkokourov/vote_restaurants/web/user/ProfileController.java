@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vkokourov.vote_restaurants.model.User;
 import ru.vkokourov.vote_restaurants.to.UserTo;
-import ru.vkokourov.vote_restaurants.util.UsersUtil;
+import ru.vkokourov.vote_restaurants.util.UserUtil;
 import ru.vkokourov.vote_restaurants.web.AuthUser;
 
 import java.net.URI;
@@ -40,7 +40,7 @@ public class ProfileController extends AbstractUserController {
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         log.info("register {}", userTo);
         checkNew(userTo);
-        User created = repository.prepareAndSave(UsersUtil.createNewFromTo(userTo));
+        User created = repository.prepareAndSave(UserUtil.createNewFromTo(userTo));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL).build().toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
@@ -53,6 +53,6 @@ public class ProfileController extends AbstractUserController {
         log.info("update {} with id={}", userTo, authUser.id());
         assureIdConsistent(userTo, authUser.id());
         User user = authUser.getUser();
-        repository.prepareAndSave(UsersUtil.updateFromTo(user, userTo));
+        repository.prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
 }
