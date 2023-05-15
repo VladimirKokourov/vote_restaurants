@@ -2,6 +2,7 @@ package ru.vkokourov.vote_restaurants.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vkokourov.vote_restaurants.error.DataConflictException;
 import ru.vkokourov.vote_restaurants.model.Vote;
 
 import java.util.List;
@@ -15,4 +16,9 @@ public interface VoteRepository extends BaseRepository<Vote> {
 
     @Query("SELECT v FROM Vote v WHERE v.id = :id and v.user.id = :userId")
     Optional<Vote> get(int userId, int id);
+
+    default Vote getExistedOrBelonged(int userId, int id) {
+        return get(userId, id).orElseThrow(
+                () -> new DataConflictException("Vote id=" + id + "   is not exist or doesn't belong to User id=" + userId));
+    }
 }
