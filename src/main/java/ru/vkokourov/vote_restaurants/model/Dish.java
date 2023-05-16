@@ -23,13 +23,7 @@ public class Dish extends NamedEntity {
     @NotNull
     private LocalDate localDate;
 
-    @Column(name = "description", nullable = false)
-    @NotBlank
-    @Size(min = 2, max = 120)
-    @NoHtml
-    private String description;
-
-    @Column(name = "price", nullable = false)
+    @Column(name = "price_in_cents", nullable = false)
     @NotNull
     @Positive
     private Long price;

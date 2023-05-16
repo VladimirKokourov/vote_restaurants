@@ -11,14 +11,11 @@ public class DishTo extends NamedTo {
 
     LocalDate localDate;
 
-    String description;
-
     Long price;
 
-    public DishTo(Integer id, String name, LocalDate localDate,String description, Long price) {
+    public DishTo(Integer id, String name, LocalDate localDate, Long price) {
         super(id, name);
         this.localDate = localDate;
-        this.description = description;
         this.price = price;
     }
 }
