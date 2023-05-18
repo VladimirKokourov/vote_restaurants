@@ -10,32 +10,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
 import ru.vkokourov.vote_restaurants.service.RestaurantService;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
-import ru.vkokourov.vote_restaurants.util.RestaurantUtil;
 import ru.vkokourov.vote_restaurants.util.validation.ValidationUtil;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
-@RequestMapping(value = RestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
-public class RestaurantController {
-    static final String REST_URL = "/api/restaurant";
+public class AdminRestaurantController {
+    static final String REST_URL = "/api/admin/restaurant";
 
     private final RestaurantService service;
-
-    @GetMapping("/{id}")
-    public RestaurantTo get(@PathVariable int id) {
-        log.info("get restaurant {}", id);
-        return service.getById(id);
-    }
-
-    @GetMapping
-    public List<RestaurantTo> getAll() {
-        log.info("getAll restaurants");
-        return service.getAll();
-    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
