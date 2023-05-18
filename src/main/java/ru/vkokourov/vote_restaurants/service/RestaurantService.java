@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
-import ru.vkokourov.vote_restaurants.repository.DishRepository;
 import ru.vkokourov.vote_restaurants.repository.RestaurantRepository;
-import ru.vkokourov.vote_restaurants.repository.UserRepository;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import ru.vkokourov.vote_restaurants.util.RestaurantUtil;
 
@@ -17,8 +15,6 @@ import java.util.List;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final DishRepository dishRepository;
-    private final UserRepository userRepository;
 
     public RestaurantTo getById(int id) {
         return RestaurantUtil.createTo(restaurantRepository.getExisted(id));
