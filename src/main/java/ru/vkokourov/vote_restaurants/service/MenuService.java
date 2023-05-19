@@ -1,16 +1,21 @@
 package ru.vkokourov.vote_restaurants.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vkokourov.vote_restaurants.model.Dish;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
 import ru.vkokourov.vote_restaurants.repository.DishRepository;
 import ru.vkokourov.vote_restaurants.repository.RestaurantRepository;
+import ru.vkokourov.vote_restaurants.to.DishTo;
 import ru.vkokourov.vote_restaurants.to.MenuTo;
 import ru.vkokourov.vote_restaurants.util.DishUtil;
 import ru.vkokourov.vote_restaurants.util.RestaurantUtil;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,15 +24,23 @@ public class MenuService {
     private final DishRepository dishRepository;
     private final RestaurantRepository restaurantRepository;
 
-    public MenuTo getMenuForToday(int restaurantId) {
-        var restaurant = restaurantRepository.getExisted(restaurantId);
-        var dishes = dishRepository.getDishesByLocalDateAndRestaurantId(LocalDate.now(), restaurantId);
-        return new MenuTo(RestaurantUtil.createTo(restaurant), LocalDate.now(), DishUtil.getTos(dishes));
+    @Transactional
+    public Optional<MenuTo> getMenuForLocalDate(int restaurantId, LocalDate localDate) {
+        var dishes = dishRepository.getDishesByLocalDateAndRestaurantId(localDate, restaurantId);
+        var restaurantTo = RestaurantUtil.createTo(restaurantRepository.getExisted(restaurantId));
+        MenuTo menuTo = new MenuTo(restaurantTo, localDate, DishUtil.getTos(dishes));
+        return Optional.of(menuTo);
     }
 
-    public MenuTo getMenuForLocalDate(int restaurantId, LocalDate localDate) {
-        var restaurant = restaurantRepository.getExisted(restaurantId);
-        var dishes = dishRepository.getDishesByLocalDateAndRestaurantId(localDate, restaurantId);
-        return new MenuTo(RestaurantUtil.createTo(restaurant), localDate, DishUtil.getTos(dishes));
+    @Transactional
+    public void deleteDishFromMenu(int restaurantId, int id) {
+        Dish dish = dishRepository.getExistedAndBelonged(restaurantId, id);
+        dishRepository.delete(dish);
+    }
+
+    @Transactional
+    public Dish save(Dish dish, int restaurantId) {
+        dish.setRestaurant(restaurantRepository.getReferenceById(restaurantId));
+        return dishRepository.save(dish);
     }
 }

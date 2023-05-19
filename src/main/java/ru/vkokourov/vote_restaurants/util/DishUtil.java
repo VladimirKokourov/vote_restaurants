@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class DishUtil {
 
     public static DishTo createTo(Dish dish) {
-        return new DishTo(dish.getId(), dish.getName(), dish.getLocalDate(), dish.getPrice());
+        return new DishTo(dish.getId(), dish.getName(), dish.getPrice());
     }
 
     public static List<DishTo> getTos(Collection<Dish> dishes) {

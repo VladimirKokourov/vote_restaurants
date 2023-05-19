@@ -26,21 +26,21 @@ public class AdminRestaurantController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        log.info("delete restaurant {}", id);
+        log.info("delete Restaurant {}", id);
         service.delete(id);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody RestaurantTo restaurantTo, @PathVariable int id) {
-        log.info("update restaurant {}", id);
+        log.info("update Restaurant {}", id);
         ValidationUtil.assureIdConsistent(restaurantTo, id);
         service.update(restaurantTo);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RestaurantTo> create(@RequestBody Restaurant restaurant) {
-        log.info("create restaurant {}", restaurant);
+        log.info("create Restaurant {}", restaurant);
         ValidationUtil.checkNew(restaurant);
         final var created = service.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

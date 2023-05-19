@@ -23,14 +23,14 @@ public class UserMenuController {
     private final MenuService service;
 
     @GetMapping("/today")
-    public MenuTo getMenuForToday(@PathVariable int restaurantId) {
+    public ResponseEntity<MenuTo> getMenuForToday(@PathVariable int restaurantId) {
         log.info("get menu of restaurant {} for today", restaurantId);
-        return service.getMenuForToday(restaurantId);
+        return ResponseEntity.of(service.getMenuForLocalDate(restaurantId, LocalDate.now()));
     }
 
     @GetMapping("/{localDate}")
-    public MenuTo getMenuForToday(@PathVariable int restaurantId, @PathVariable LocalDate localDate) {
+    public ResponseEntity<MenuTo> getMenuForToday(@PathVariable int restaurantId, @PathVariable LocalDate localDate) {
         log.info("get menu of restaurant {} for {}", restaurantId, localDate);
-        return service.getMenuForLocalDate(restaurantId, localDate);
+        return ResponseEntity.of(service.getMenuForLocalDate(restaurantId, localDate));
     }
 }
