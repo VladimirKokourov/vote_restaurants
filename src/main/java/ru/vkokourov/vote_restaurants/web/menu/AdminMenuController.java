@@ -19,7 +19,7 @@ import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
 @AllArgsConstructor
 @Slf4j
 public class AdminMenuController {
-    static final String REST_URL = "/api/admin/restaurant/{restaurantId}/menu";
+    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menus";
 
     private final MenuService service;
 

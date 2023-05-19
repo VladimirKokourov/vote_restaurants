@@ -19,7 +19,7 @@ import java.net.URI;
 @AllArgsConstructor
 @Slf4j
 public class AdminRestaurantController {
-    static final String REST_URL = "/api/admin/restaurant";
+    static final String REST_URL = "/api/admin/restaurants";
 
     private final RestaurantService service;
 

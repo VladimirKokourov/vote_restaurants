@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Slf4j
 public class UserMenuController {
-    static final String REST_URL = "/api/restaurant/{restaurantId}/menu";
+    static final String REST_URL = "/api/restaurants/{restaurantId}/menus";
 
     private final MenuService service;
 
