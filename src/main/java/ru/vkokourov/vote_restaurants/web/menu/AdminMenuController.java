@@ -24,11 +24,14 @@ public class AdminMenuController {
     private final MenuService service;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public Dish addDishToMenu(@RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> addDishToMenu(@RequestBody Dish dish, @PathVariable int restaurantId) {
         log.info("create Dish for Restaurant {}", restaurantId);
         checkNew(dish);
-        return service.save(dish, restaurantId);
+        var created = service.save(dish, restaurantId);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(UserMenuController.REST_URL + "/" + created.getLocalDate())
+                .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
