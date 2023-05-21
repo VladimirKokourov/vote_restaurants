@@ -2,7 +2,10 @@ package ru.vkokourov.vote_restaurants.util.validation;
 
 import lombok.experimental.UtilityClass;
 import ru.vkokourov.vote_restaurants.HasId;
+import ru.vkokourov.vote_restaurants.error.EndVotingTimeException;
 import ru.vkokourov.vote_restaurants.error.IllegalRequestDataException;
+
+import java.time.LocalTime;
 
 @UtilityClass
 public class ValidationUtil {
@@ -19,6 +22,12 @@ public class ValidationUtil {
             bean.setId(id);
         } else if (bean.id() != id) {
             throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must has id=" + id);
+        }
+    }
+
+    public static void checkVotingTime(LocalTime currentTime, LocalTime endVotingTime) {
+        if (currentTime.isAfter(endVotingTime)) {
+            throw new EndVotingTimeException("Voting is over. You can't vote after " + endVotingTime);
         }
     }
 }

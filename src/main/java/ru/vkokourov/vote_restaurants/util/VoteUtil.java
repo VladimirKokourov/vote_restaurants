@@ -1,9 +1,11 @@
 package ru.vkokourov.vote_restaurants.util;
 
 import lombok.experimental.UtilityClass;
+import ru.vkokourov.vote_restaurants.error.EndVotingTimeException;
 import ru.vkokourov.vote_restaurants.model.Vote;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
 
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
