@@ -63,6 +63,7 @@ public class RestExceptionHandler {
             put(FileNotFoundException.class, BAD_REQUEST);
             put(AccessDeniedException.class, FORBIDDEN);
             put(AuthenticationException.class, UNAUTHORIZED);
+            put(EndVotingTimeException.class, FORBIDDEN);
         }
     };
 
