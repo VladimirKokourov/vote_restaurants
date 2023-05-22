@@ -8,12 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.vkokourov.vote_restaurants.model.Vote;
 import ru.vkokourov.vote_restaurants.service.VoteService;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
-import ru.vkokourov.vote_restaurants.util.validation.ValidationUtil;
 import ru.vkokourov.vote_restaurants.web.AuthUser;
-import ru.vkokourov.vote_restaurants.web.restaurant.AdminRestaurantController;
 
 import java.net.URI;
 import java.time.LocalTime;
@@ -46,12 +43,12 @@ public class VoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody Vote vote) {
+    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo) {
         checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
         var userId = authUser.id();
-        log.info("create Vote {} for User {}", vote, userId);
-        checkNew(vote);
-        var created = service.save(userId, vote);
+        log.info("create Vote {} for User {}", voteTo, userId);
+        checkNew(voteTo);
+        var created = service.save(userId, voteTo);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -60,12 +57,12 @@ public class VoteController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody Vote vote, @PathVariable int id) {
+    public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo, @PathVariable int id) {
         checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
         var userId = authUser.id();
-        log.info("update Vote {} for User {}", vote, userId);
-        assureIdConsistent(vote, id);
-        service.update(userId, vote, id);
+        log.info("update Vote {} for User {}", voteTo, userId);
+        assureIdConsistent(voteTo, id);
+        service.update(userId, voteTo, id);
     }
 
     @DeleteMapping("/{id}")

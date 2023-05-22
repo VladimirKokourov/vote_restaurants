@@ -48,6 +48,7 @@ public class RestExceptionHandler {
         {
 // more specific first
             put(NotFoundException.class, NOT_FOUND);
+            put(EndVotingTimeException.class, FORBIDDEN);
             put(DataConflictException.class, DATA_CONFLICT);
             put(IllegalRequestDataException.class, BAD_REQUEST);
             put(AppException.class, APP_ERROR);
@@ -63,7 +64,6 @@ public class RestExceptionHandler {
             put(FileNotFoundException.class, BAD_REQUEST);
             put(AccessDeniedException.class, FORBIDDEN);
             put(AuthenticationException.class, UNAUTHORIZED);
-            put(EndVotingTimeException.class, FORBIDDEN);
         }
     };
 

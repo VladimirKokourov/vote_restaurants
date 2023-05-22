@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vkokourov.vote_restaurants.model.Vote;
+import ru.vkokourov.vote_restaurants.repository.RestaurantRepository;
 import ru.vkokourov.vote_restaurants.repository.UserRepository;
 import ru.vkokourov.vote_restaurants.repository.VoteRepository;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
@@ -17,17 +18,20 @@ import java.util.Optional;
 public class VoteService {
 
     private final VoteRepository voteRepository;
+    private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
 
     @Transactional
-    public Vote save(int userId, Vote vote) {
-        vote.setUser(userRepository.getExisted(userId));
-        return voteRepository.save(vote);
+    public VoteTo save(int userId, VoteTo voteTo) {
+        var restaurant = restaurantRepository.getExisted(voteTo.getRestaurantId());
+        var user = userRepository.getExisted(userId);
+        var created = new Vote(voteTo.getLocalDate(), restaurant, user);
+        return VoteUtil.createTo(voteRepository.save(created));
     }
 
-    public void update(int userId, Vote vote, int id) {
+    public void update(int userId, VoteTo voteTo, int id) {
         voteRepository.getExistedOrBelonged(userId, id);
-        save(userId, vote);
+        save(userId, voteTo);
     }
 
     public void delete(int userId, int id) {
