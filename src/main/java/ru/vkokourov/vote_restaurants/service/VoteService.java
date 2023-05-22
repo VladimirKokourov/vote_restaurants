@@ -28,9 +28,12 @@ public class VoteService {
         return VoteUtil.createTo(voteRepository.save(created));
     }
 
+    @Transactional
     public void update(int userId, VoteTo voteTo, int id) {
-        voteRepository.getExistedOrBelonged(userId, id);
-        save(userId, voteTo);
+        var updated = voteRepository.getExistedOrBelonged(userId, id);
+        var restaurant = restaurantRepository.getExisted(voteTo.getRestaurantId());
+        updated.setRestaurant(restaurant);
+        voteRepository.save(updated);
     }
 
     public void delete(int userId, int id) {

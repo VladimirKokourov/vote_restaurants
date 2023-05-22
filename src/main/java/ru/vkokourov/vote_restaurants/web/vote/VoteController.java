@@ -24,7 +24,7 @@ import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
 @Slf4j
 public class VoteController {
     static final String REST_URL = "/api/profile/votes";
-    private static final String END_VOTING_TIME = "11:00";
+    private static final String END_VOTING_TIME = "14:00";
 
     private final VoteService service;
 
