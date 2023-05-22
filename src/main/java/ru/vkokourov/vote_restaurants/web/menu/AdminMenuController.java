@@ -12,7 +12,8 @@ import ru.vkokourov.vote_restaurants.service.MenuService;
 
 import java.net.URI;
 
-import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
+import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.assureIdConsistent;
+import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.checkNew;
 
 @RestController
 @RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

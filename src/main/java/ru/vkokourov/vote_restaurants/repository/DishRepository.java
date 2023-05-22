@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vkokourov.vote_restaurants.error.DataConflictException;
 import ru.vkokourov.vote_restaurants.model.Dish;
-import ru.vkokourov.vote_restaurants.model.Restaurant;
 
 import java.time.LocalDate;
 import java.util.List;

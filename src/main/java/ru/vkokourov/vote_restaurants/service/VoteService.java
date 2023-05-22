@@ -11,7 +11,6 @@ import ru.vkokourov.vote_restaurants.to.VoteTo;
 import ru.vkokourov.vote_restaurants.util.VoteUtil;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

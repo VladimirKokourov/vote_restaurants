@@ -2,7 +2,6 @@ package ru.vkokourov.vote_restaurants.web.user;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import ru.vkokourov.vote_restaurants.model.User;
