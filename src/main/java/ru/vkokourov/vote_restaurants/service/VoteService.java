@@ -1,6 +1,10 @@
 package ru.vkokourov.vote_restaurants.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vkokourov.vote_restaurants.model.Vote;
@@ -17,17 +21,20 @@ import static ru.vkokourov.vote_restaurants.util.VoteUtil.getTos;
 import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class VoteService {
-    private static final String END_VOTING_TIME = "11:00";
-
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
 
+    @Value("${voting.endVotingTime}")
+    @Setter
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime endVotingTime;
+
     @Transactional
     public VoteTo create(int userId, VoteTo voteTo) {
-        checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
+        checkVotingTime(LocalTime.now(), endVotingTime);
         checkNew(voteTo);
         var restaurant = restaurantRepository.getExisted(voteTo.getRestaurantId());
         var user = userRepository.getExisted(userId);
@@ -37,7 +44,7 @@ public class VoteService {
 
     @Transactional
     public void update(int userId, VoteTo voteTo, int id) {
-        checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
+        checkVotingTime(LocalTime.now(), endVotingTime);
         assureIdConsistent(voteTo, id);
         var updated = voteRepository.getExistedOrBelonged(userId, id);
         var restaurant = restaurantRepository.getExisted(voteTo.getRestaurantId());
