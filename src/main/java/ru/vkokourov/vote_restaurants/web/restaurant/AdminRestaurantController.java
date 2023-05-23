@@ -10,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
 import ru.vkokourov.vote_restaurants.service.RestaurantService;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
-import ru.vkokourov.vote_restaurants.util.validation.ValidationUtil;
 
 import java.net.URI;
 
@@ -34,14 +33,12 @@ public class AdminRestaurantController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody RestaurantTo restaurantTo, @PathVariable int id) {
         log.info("update Restaurant {}", id);
-        ValidationUtil.assureIdConsistent(restaurantTo, id);
-        service.update(restaurantTo);
+        service.update(restaurantTo, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RestaurantTo> create(@RequestBody Restaurant restaurant) {
         log.info("create Restaurant {}", restaurant);
-        ValidationUtil.checkNew(restaurant);
         final var created = service.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

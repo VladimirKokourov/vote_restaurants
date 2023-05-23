@@ -13,10 +13,7 @@ import ru.vkokourov.vote_restaurants.to.VoteTo;
 import ru.vkokourov.vote_restaurants.web.AuthUser;
 
 import java.net.URI;
-import java.time.LocalTime;
 import java.util.List;
-
-import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
 
 @RestController
 @RequestMapping(value = VoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -24,7 +21,6 @@ import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.*;
 @Slf4j
 public class VoteController {
     static final String REST_URL = "/api/profile/votes";
-    private static final String END_VOTING_TIME = "14:00";
 
     private final VoteService service;
 
@@ -44,11 +40,9 @@ public class VoteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo) {
-        checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
         var userId = authUser.id();
         log.info("create Vote {} for User {}", voteTo, userId);
-        checkNew(voteTo);
-        var created = service.save(userId, voteTo);
+        var created = service.create(userId, voteTo);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -58,10 +52,8 @@ public class VoteController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo, @PathVariable int id) {
-        checkVotingTime(LocalTime.now(), LocalTime.parse(END_VOTING_TIME));
         var userId = authUser.id();
         log.info("update Vote {} for User {}", voteTo, userId);
-        assureIdConsistent(voteTo, id);
         service.update(userId, voteTo, id);
     }
 

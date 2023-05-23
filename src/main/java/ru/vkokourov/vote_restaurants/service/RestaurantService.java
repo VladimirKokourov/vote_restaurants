@@ -6,9 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
 import ru.vkokourov.vote_restaurants.repository.RestaurantRepository;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
-import ru.vkokourov.vote_restaurants.util.RestaurantUtil;
 
 import java.util.List;
+
+import static ru.vkokourov.vote_restaurants.util.RestaurantUtil.createTo;
+import static ru.vkokourov.vote_restaurants.util.RestaurantUtil.getTos;
+import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.assureIdConsistent;
+import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.checkNew;
 
 @Service
 @AllArgsConstructor
@@ -17,11 +21,11 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     public RestaurantTo getById(int id) {
-        return RestaurantUtil.createTo(restaurantRepository.getExisted(id));
+        return createTo(restaurantRepository.getExisted(id));
     }
 
     public List<RestaurantTo> getAll() {
-        return RestaurantUtil.getTos(restaurantRepository.findAll());
+        return getTos(restaurantRepository.findAll());
     }
 
     @Transactional
@@ -30,7 +34,8 @@ public class RestaurantService {
         restaurantRepository.delete(restaurant);
     }
 
-    public void update(RestaurantTo restaurantTo) {
+    public void update(RestaurantTo restaurantTo, int id) {
+        assureIdConsistent(restaurantTo, id);
         var updated = restaurantRepository.getExisted(restaurantTo.getId());
         updated.setName(restaurantTo.getName());
         updated.setDescription(restaurantTo.getDescription());
@@ -39,7 +44,8 @@ public class RestaurantService {
     }
 
     public RestaurantTo create(Restaurant restaurant) {
-        return RestaurantUtil.createTo(restaurantRepository.save(restaurant));
+        checkNew(restaurant);
+        return createTo(restaurantRepository.save(restaurant));
     }
 
 }
