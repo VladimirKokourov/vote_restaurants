@@ -53,7 +53,7 @@ public class VoteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo, @PathVariable int id) {
         var userId = authUser.id();
-        log.info("update Vote {} for User {}", voteTo, userId);
+        log.info("update {} for User {}", voteTo, userId);
         service.update(userId, voteTo, id);
     }
 

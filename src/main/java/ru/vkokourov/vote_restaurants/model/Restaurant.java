@@ -40,4 +40,10 @@ public class Restaurant extends NamedEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Schema(hidden = true)
     private List<Vote> votes;
+
+    public Restaurant(Integer id, String name, String description, String address) {
+        super(id, name);
+        this.description = description;
+        this.address = address;
+    }
 }

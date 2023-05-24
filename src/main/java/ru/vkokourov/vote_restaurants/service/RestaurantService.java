@@ -34,6 +34,7 @@ public class RestaurantService {
         restaurantRepository.delete(restaurant);
     }
 
+    @Transactional
     public void update(RestaurantTo restaurantTo, int id) {
         assureIdConsistent(restaurantTo, id);
         var updated = restaurantRepository.getExisted(restaurantTo.getId());

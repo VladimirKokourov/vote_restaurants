@@ -1,12 +1,12 @@
 package ru.vkokourov.vote_restaurants.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vkokourov.vote_restaurants.error.NotFoundException;
 import ru.vkokourov.vote_restaurants.model.Vote;
 import ru.vkokourov.vote_restaurants.repository.RestaurantRepository;
 import ru.vkokourov.vote_restaurants.repository.UserRepository;
@@ -44,6 +44,7 @@ public class VoteService {
 
     @Transactional
     public void update(int userId, VoteTo voteTo, int id) {
+        checkTodaysDate(voteTo.getLocalDate());
         checkVotingTime(LocalTime.now(), endVotingTime);
         assureIdConsistent(voteTo, id);
         var updated = voteRepository.getExistedOrBelonged(userId, id);
@@ -54,6 +55,8 @@ public class VoteService {
 
     public void delete(int userId, int id) {
         Vote vote = voteRepository.getExistedOrBelonged(userId, id);
+        checkTodaysDate(vote.getLocalDate());
+        checkVotingTime(LocalTime.now(), endVotingTime);
         voteRepository.delete(vote);
     }
 
@@ -62,6 +65,7 @@ public class VoteService {
     }
 
     public VoteTo getById(int userId, int id) {
-        return createTo(voteRepository.getExistedOrBelonged(userId, id));
+        return createTo(voteRepository.get(userId, id)
+                .orElseThrow(() -> new NotFoundException("Vote with id=" + id + " not found")));
     }
 }

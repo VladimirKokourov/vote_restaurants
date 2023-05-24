@@ -4,7 +4,9 @@ import lombok.experimental.UtilityClass;
 import ru.vkokourov.vote_restaurants.HasId;
 import ru.vkokourov.vote_restaurants.error.EndVotingTimeException;
 import ru.vkokourov.vote_restaurants.error.IllegalRequestDataException;
+import ru.vkokourov.vote_restaurants.error.NotTodaysDateException;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @UtilityClass
@@ -28,6 +30,15 @@ public class ValidationUtil {
     public static void checkVotingTime(LocalTime currentTime, LocalTime endVotingTime) {
         if (currentTime.isAfter(endVotingTime)) {
             throw new EndVotingTimeException("Voting is over. You can't vote after " + endVotingTime);
+        }
+    }
+
+    public static void checkTodaysDate(LocalDate localDate) {
+        if (localDate == null) {
+            throw new IllegalArgumentException("LocalDate is null.");
+        }
+        if (!localDate.equals(LocalDate.now())) {
+            throw new NotTodaysDateException("Changing previous votes is not allowed.");
         }
     }
 }

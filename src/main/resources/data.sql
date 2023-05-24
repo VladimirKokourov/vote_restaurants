@@ -43,6 +43,6 @@ VALUES ('Burger', '2023-05-15', '599', 1),
 
 INSERT INTO VOTE(vote_date, restaurant_id, user_id)
 VALUES ('2023-05-15', 1, 1),
-       ('2023-05-15', 5, 3),
        (now(), 2, 1),
+       ('2023-05-15', 5, 3),
        (now(), 5, 3);
