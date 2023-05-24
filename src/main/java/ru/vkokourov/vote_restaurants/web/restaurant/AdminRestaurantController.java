@@ -1,5 +1,6 @@
 package ru.vkokourov.vote_restaurants.web.restaurant;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,13 +32,13 @@ public class AdminRestaurantController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody RestaurantTo restaurantTo, @PathVariable int id) {
+    public void update(@RequestBody @Valid RestaurantTo restaurantTo, @PathVariable int id) {
         log.info("update Restaurant {}", id);
         service.update(restaurantTo, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RestaurantTo> create(@RequestBody Restaurant restaurant) {
+    public ResponseEntity<RestaurantTo> create(@RequestBody @Valid Restaurant restaurant) {
         log.info("create Restaurant {}", restaurant);
         final var created = service.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

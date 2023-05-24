@@ -1,5 +1,6 @@
 package ru.vkokourov.vote_restaurants.web.menu;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class AdminMenuController {
     private final MenuService service;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> addDishToMenu(@RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> addDishToMenu(@RequestBody @Valid Dish dish, @PathVariable int restaurantId) {
         log.info("create Dish for Restaurant {}", restaurantId);
         checkNew(dish);
         var created = service.save(dish, restaurantId);
@@ -37,7 +38,7 @@ public class AdminMenuController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
+    public void update(@RequestBody @Valid Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
         log.info("update Dish {} for Restaurant {}", id, restaurantId);
         assureIdConsistent(dish, id);
         service.save(dish, restaurantId);

@@ -1,5 +1,6 @@
 package ru.vkokourov.vote_restaurants.web.vote;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class VoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo) {
+    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody @Valid VoteTo voteTo) {
         var userId = authUser.id();
         log.info("create Vote {} for User {}", voteTo, userId);
         var created = service.create(userId, voteTo);
@@ -51,7 +52,7 @@ public class VoteController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody VoteTo voteTo, @PathVariable int id) {
+    public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody @Valid VoteTo voteTo, @PathVariable int id) {
         var userId = authUser.id();
         log.info("update {} for User {}", voteTo, userId);
         service.update(userId, voteTo, id);
