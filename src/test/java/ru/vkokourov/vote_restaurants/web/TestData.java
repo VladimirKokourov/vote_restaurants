@@ -1,20 +1,21 @@
-package ru.vkokourov.vote_restaurants.web.vote;
+package ru.vkokourov.vote_restaurants.web;
 
 import ru.vkokourov.vote_restaurants.model.Restaurant;
-import ru.vkokourov.vote_restaurants.model.Vote;
+import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
-import ru.vkokourov.vote_restaurants.web.MatcherFactory;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class VoteTestData {
+public class TestData {
     public static MatcherFactory.Matcher<VoteTo> VOTE_TO_MATCHER = MatcherFactory.usingEqualsComparator(VoteTo.class);
+    public static MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER = MatcherFactory.usingEqualsComparator(RestaurantTo.class);
 
     public static final int VOTE1_ID = 1;
     public static final int VOTE2_ID = 2;
     public static final int RESTAURANT1_ID = 1;
     public static final int RESTAURANT2_ID = 2;
+    public static final int NOT_EXIST_RESTAURANT_ID = Integer.MAX_VALUE;
     public static final int GUEST_VOTE_ID = 8;
     public static final LocalDate LOCAL_DATE = LocalDate.of(2023, 5, 15);
 
@@ -37,7 +38,11 @@ public class VoteTestData {
         return new VoteTo(VOTE1_ID, LOCAL_DATE, RESTAURANT2_ID);
     }
 
-    public static Vote getUpdated() {
-        return new Vote(VOTE1_ID, LOCAL_DATE, restaurant2);
+    public static RestaurantTo getNewRestaurantTo() {
+        return new RestaurantTo(null, "New Restaurant", "New", "New");
+    }
+
+    public static RestaurantTo getUpdatedRestaurantTo() {
+        return new RestaurantTo(RESTAURANT1_ID, "Burger Queen", "Lounge Cafe", "Lenina st. 1");
     }
 }

@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.*;
 import static ru.vkokourov.vote_restaurants.web.vote.VoteController.REST_URL;
-import static ru.vkokourov.vote_restaurants.web.vote.VoteTestData.*;
+import static ru.vkokourov.vote_restaurants.web.TestData.*;
 
 public class VoteControllerTest extends AbstractControllerTest {
     private static final String REST_URL_SLASH = REST_URL + '/';
@@ -103,7 +103,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     @WithUserDetails(value = USER_MAIL)
     void update() throws Exception {
         service.setEndVotingTime(LocalTime.MAX);
-        final var updatedTo = VoteTestData.getUpdatedTo();
+        final var updatedTo = getUpdatedTo();
         perform(MockMvcRequestBuilders.put(REST_URL_SLASH + VOTE2_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updatedTo)))

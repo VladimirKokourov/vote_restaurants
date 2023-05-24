@@ -37,7 +37,7 @@ public class RestaurantService {
     @Transactional
     public void update(RestaurantTo restaurantTo, int id) {
         assureIdConsistent(restaurantTo, id);
-        var updated = restaurantRepository.getExisted(restaurantTo.getId());
+        var updated = restaurantRepository.getExisted(id);
         updated.setName(restaurantTo.getName());
         updated.setDescription(restaurantTo.getDescription());
         updated.setAddress(restaurantTo.getAddress());
