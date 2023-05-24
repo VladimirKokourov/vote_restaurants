@@ -50,6 +50,4 @@ public class AdminMenuController {
         log.info("delete Dish {} from Restaurant {}", dishId, restaurantId);
         service.deleteDishFromMenu(restaurantId, dishId);
     }
-
-
 }

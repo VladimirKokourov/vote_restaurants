@@ -1,6 +1,8 @@
 package ru.vkokourov.vote_restaurants.web;
 
+import ru.vkokourov.vote_restaurants.model.Dish;
 import ru.vkokourov.vote_restaurants.model.Restaurant;
+import ru.vkokourov.vote_restaurants.to.DishTo;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
 
@@ -10,13 +12,15 @@ import java.util.List;
 public class TestData {
     public static MatcherFactory.Matcher<VoteTo> VOTE_TO_MATCHER = MatcherFactory.usingEqualsComparator(VoteTo.class);
     public static MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER = MatcherFactory.usingEqualsComparator(RestaurantTo.class);
+    public static MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingEqualsComparator(Dish.class);
 
     public static final int VOTE1_ID = 1;
     public static final int VOTE2_ID = 2;
     public static final int RESTAURANT1_ID = 1;
     public static final int RESTAURANT2_ID = 2;
+    public static final int DISH1_ID = 1;
 
-    public static final int NOT_EXIST_RESTAURANT_ID = Integer.MAX_VALUE;
+    public static final int NOT_EXIST_ENTITY_ID = Integer.MAX_VALUE;
     public static final int GUEST_VOTE_ID = 8;
     public static final LocalDate LOCAL_DATE = LocalDate.of(2023, 5, 15);
 
@@ -49,5 +53,13 @@ public class TestData {
 
     public static RestaurantTo getUpdatedRestaurantTo() {
         return new RestaurantTo(RESTAURANT1_ID, "Burger Queen", "Lounge Cafe", "Lenina st. 1");
+    }
+
+    public static Dish getNewDish() {
+        return new Dish(null, "NewDish", LocalDate.now(),100L);
+    }
+
+    public static Dish getUpdatedDish() {
+        return new Dish(DISH1_ID, "Updated", LocalDate.now(), 111L);
     }
 }
