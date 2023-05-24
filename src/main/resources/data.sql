@@ -18,7 +18,6 @@ VALUES ('Burger King', 'Fast food', 'Lenina st. 5'),
 INSERT INTO DISH(name, dish_date, price_in_cents, restaurant_id)
 VALUES ('Burger', '2023-05-15', '599', 1),
        ('Cheeseburger', '2023-05-15', '699', 1),
-       ('Hamburger', '2023-05-15', '799', 1),
        ('Burger', '2023-05-15', '599', 2),
        ('Cheeseburger', '2023-05-15', '699', 2),
        ('Hamburger', '2023-05-15', '799', 2),
