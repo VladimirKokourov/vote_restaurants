@@ -1,8 +1,6 @@
 package ru.vkokourov.vote_restaurants.web;
 
 import ru.vkokourov.vote_restaurants.model.Dish;
-import ru.vkokourov.vote_restaurants.model.Restaurant;
-import ru.vkokourov.vote_restaurants.to.DishTo;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import ru.vkokourov.vote_restaurants.to.VoteTo;
 
@@ -10,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class TestData {
+
     public static MatcherFactory.Matcher<VoteTo> VOTE_TO_MATCHER = MatcherFactory.usingEqualsComparator(VoteTo.class);
     public static MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER = MatcherFactory.usingEqualsComparator(RestaurantTo.class);
     public static MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingEqualsComparator(Dish.class);
@@ -56,7 +55,7 @@ public class TestData {
     }
 
     public static Dish getNewDish() {
-        return new Dish(null, "NewDish", LocalDate.now(),100L);
+        return new Dish(null, "NewDish", LocalDate.now(), 100L);
     }
 
     public static Dish getUpdatedDish() {

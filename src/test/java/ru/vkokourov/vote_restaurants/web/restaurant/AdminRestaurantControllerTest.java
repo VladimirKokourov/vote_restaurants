@@ -12,13 +12,13 @@ import ru.vkokourov.vote_restaurants.service.RestaurantService;
 import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import ru.vkokourov.vote_restaurants.util.JsonUtil;
 import ru.vkokourov.vote_restaurants.web.AbstractControllerTest;
-import ru.vkokourov.vote_restaurants.web.vote.VoteController;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.vkokourov.vote_restaurants.web.restaurant.AdminRestaurantController.REST_URL;
-import static ru.vkokourov.vote_restaurants.web.user.UserTestData.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vkokourov.vote_restaurants.web.TestData.*;
+import static ru.vkokourov.vote_restaurants.web.restaurant.AdminRestaurantController.REST_URL;
+import static ru.vkokourov.vote_restaurants.web.user.UserTestData.ADMIN_MAIL;
+import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
 
 public class AdminRestaurantControllerTest extends AbstractControllerTest {
 
@@ -48,7 +48,7 @@ public class AdminRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void deleteNotExistRestaurant() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL_SLASH + NOT_EXIST_RESTAURANT_ID))
+        perform(MockMvcRequestBuilders.delete(REST_URL_SLASH + NOT_EXIST_ENTITY_ID))
                 .andExpect(status().isNotFound());
     }
 
@@ -78,7 +78,10 @@ public class AdminRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void updateForUserRole() throws Exception {
-        perform(MockMvcRequestBuilders.put(REST_URL_SLASH + RESTAURANT1_ID))
+        final var updatedTo = getUpdatedRestaurantTo();
+        perform(MockMvcRequestBuilders.put(REST_URL_SLASH + RESTAURANT1_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andExpect(status().isForbidden());
     }
 
@@ -88,7 +91,8 @@ public class AdminRestaurantControllerTest extends AbstractControllerTest {
         final var newRestaurantTo = getNewRestaurantTo();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(newRestaurantTo)));
+                .content(JsonUtil.writeValue(newRestaurantTo)))
+                .andExpect(status().isCreated());
 
         final var created = RESTAURANT_TO_MATCHER.readFromJson(action);
         final var newId = created.getId();
@@ -111,7 +115,10 @@ public class AdminRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void createForUserRole() throws Exception {
-        perform(MockMvcRequestBuilders.post(REST_URL))
+        final var newRestaurantTo = getNewRestaurantTo();
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newRestaurantTo)))
                 .andExpect(status().isForbidden());
     }
 }

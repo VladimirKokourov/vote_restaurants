@@ -9,13 +9,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vkokourov.vote_restaurants.model.Dish;
 import ru.vkokourov.vote_restaurants.repository.DishRepository;
-import ru.vkokourov.vote_restaurants.service.MenuService;
 import ru.vkokourov.vote_restaurants.util.JsonUtil;
 import ru.vkokourov.vote_restaurants.web.AbstractControllerTest;
 import ru.vkokourov.vote_restaurants.web.user.UserTestData;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vkokourov.vote_restaurants.web.TestData.*;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.ADMIN_MAIL;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
@@ -24,9 +23,6 @@ public class AdminMenuControllerTest extends AbstractControllerTest {
 
     public static final String REST_URL = "/api/admin/restaurants/" + RESTAURANT1_ID + "/menus";
     public static final String REST_URL_SLASH = REST_URL + '/';
-
-    @Autowired
-    private MenuService service;
 
     @Autowired
     private DishRepository dishRepository;
