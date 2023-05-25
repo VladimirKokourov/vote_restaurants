@@ -26,7 +26,7 @@ public class AdminMenuController {
     private final MenuService service;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> addDishToMenu(@RequestBody @Valid Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> addDishInMenu(@RequestBody @Valid Dish dish, @PathVariable int restaurantId) {
         log.info("create Dish for Restaurant {}", restaurantId);
         checkNew(dish);
         var created = service.save(dish, restaurantId);
