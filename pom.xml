@@ -39,7 +39,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!--        jackson-->
+        <!--Jackson-->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-hibernate5-jakarta</artifactId>
@@ -50,16 +50,6 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
-        </dependency>
-
-        <!--cache-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
         </dependency>
 
         <dependency>
@@ -83,13 +73,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--        https://www.baeldung.com/spring-security-integration-tests        -->
+        <!--    https://www.baeldung.com/spring-security-integration-tests    -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--        https://youtrack.jetbrains.com/issue/IDEA-231927-->
+        <!--    https://youtrack.jetbrains.com/issue/IDEA-231927    -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
@@ -112,7 +102,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <!--https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven -->
+                <!--    https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven    -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
