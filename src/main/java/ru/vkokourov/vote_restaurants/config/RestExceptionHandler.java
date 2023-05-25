@@ -46,7 +46,7 @@ public class RestExceptionHandler {
     //    https://stackoverflow.com/a/52254601/548473
     static final Map<Class<? extends Throwable>, ErrorType> HTTP_STATUS_MAP = new LinkedHashMap<>() {
         {
-// more specific first
+            // more specific first
             put(NotTodaysDateException.class, FORBIDDEN);
             put(EndVotingTimeException.class, FORBIDDEN);
             put(NotFoundException.class, NOT_FOUND);

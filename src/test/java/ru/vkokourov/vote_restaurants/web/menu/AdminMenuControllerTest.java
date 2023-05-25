@@ -11,14 +11,12 @@ import ru.vkokourov.vote_restaurants.model.Dish;
 import ru.vkokourov.vote_restaurants.repository.DishRepository;
 import ru.vkokourov.vote_restaurants.util.JsonUtil;
 import ru.vkokourov.vote_restaurants.web.AbstractControllerTest;
-import ru.vkokourov.vote_restaurants.web.user.UserTestData;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vkokourov.vote_restaurants.web.TestData.NOT_EXIST_ENTITY_ID;
 import static ru.vkokourov.vote_restaurants.web.menu.MenuTestData.*;
 import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.RESTAURANT1_ID;
-import static ru.vkokourov.vote_restaurants.web.user.UserTestData.*;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.ADMIN_MAIL;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
 
