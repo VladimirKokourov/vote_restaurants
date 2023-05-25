@@ -10,6 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vkokourov.vote_restaurants.web.TestData.*;
+import static ru.vkokourov.vote_restaurants.web.menu.MenuTestData.*;
+import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.RESTAURANT1_ID;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
 
 public class UserMenuControllerTest extends AbstractControllerTest {

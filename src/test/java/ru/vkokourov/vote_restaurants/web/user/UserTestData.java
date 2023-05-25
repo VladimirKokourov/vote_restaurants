@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "meals", "password");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "votes", "password");
 
     public static final int USER_ID = 1;
     public static final int ADMIN_ID = 2;
@@ -32,7 +32,7 @@ public class UserTestData {
         return new User(USER_ID, "UpdatedName", USER_MAIL, "newPass", false, new Date(), List.of(Role.ADMIN));
     }
 
-    public static String jsonWithPassword(User user, String passw) {
-        return JsonUtil.writeAdditionProps(user, "password", passw);
+    public static String jsonWithPassword(User user, String password) {
+        return JsonUtil.writeAdditionProps(user, "password", password);
     }
 }

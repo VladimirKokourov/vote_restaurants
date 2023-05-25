@@ -18,9 +18,11 @@ import java.time.LocalTime;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.RESTAURANT1_ID;
+import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.RESTAURANT2_ID;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.*;
 import static ru.vkokourov.vote_restaurants.web.vote.VoteController.REST_URL;
-import static ru.vkokourov.vote_restaurants.web.TestData.*;
+import static ru.vkokourov.vote_restaurants.web.vote.VoteTestData.*;
 
 public class VoteControllerTest extends AbstractControllerTest {
     private static final String REST_URL_SLASH = REST_URL + '/';

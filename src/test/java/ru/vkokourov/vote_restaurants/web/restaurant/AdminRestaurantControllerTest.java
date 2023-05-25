@@ -15,8 +15,9 @@ import ru.vkokourov.vote_restaurants.web.AbstractControllerTest;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.vkokourov.vote_restaurants.web.TestData.*;
+import static ru.vkokourov.vote_restaurants.web.TestData.NOT_EXIST_ENTITY_ID;
 import static ru.vkokourov.vote_restaurants.web.restaurant.AdminRestaurantController.REST_URL;
+import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.*;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.ADMIN_MAIL;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
 
