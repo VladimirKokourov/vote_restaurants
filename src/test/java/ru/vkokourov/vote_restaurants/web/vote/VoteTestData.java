@@ -16,7 +16,7 @@ public class VoteTestData {
 
     public static final int VOTE1_ID = 1;
     public static final int VOTE2_ID = VOTE1_ID + 1;
-    public static final int GUEST_VOTE_ID = 8;
+    public static final int VOTE_GUEST_ID = 8;
 
     public static final VoteTo voteTo1 = new VoteTo(VOTE1_ID, LOCAL_DATE, RESTAURANT1_ID);
     public static final VoteTo voteTo2 = new VoteTo(VOTE2_ID, LocalDate.now(), RESTAURANT2_ID);

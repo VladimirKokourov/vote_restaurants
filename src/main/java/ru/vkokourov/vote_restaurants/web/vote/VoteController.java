@@ -17,7 +17,8 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = VoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = VoteController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class VoteController {
@@ -40,7 +41,8 @@ public class VoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser, @RequestBody @Valid VoteTo voteTo) {
+    public ResponseEntity<VoteTo> create(@AuthenticationPrincipal AuthUser authUser,
+                                         @RequestBody @Valid VoteTo voteTo) {
         var userId = authUser.id();
         log.info("create Vote {} for User {}", voteTo, userId);
         var created = service.create(userId, voteTo);
@@ -52,7 +54,9 @@ public class VoteController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@AuthenticationPrincipal AuthUser authUser, @RequestBody @Valid VoteTo voteTo, @PathVariable int id) {
+    public void update(@AuthenticationPrincipal AuthUser authUser,
+                       @RequestBody @Valid VoteTo voteTo,
+                       @PathVariable int id) {
         var userId = authUser.id();
         log.info("update {} for User {}", voteTo, userId);
         service.update(userId, voteTo, id);
@@ -60,7 +64,8 @@ public class VoteController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@AuthenticationPrincipal AuthUser authUser, @PathVariable int id) {
+    public void delete(@AuthenticationPrincipal AuthUser authUser,
+                       @PathVariable int id) {
         int userId = authUser.id();
         log.info("delete Vote {} for User {}", id, userId);
         service.delete(userId, id);

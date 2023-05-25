@@ -17,7 +17,8 @@ import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.assur
 import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.checkNew;
 
 @RestController
-@RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminMenuController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class AdminMenuController {
@@ -26,7 +27,8 @@ public class AdminMenuController {
     private final MenuService service;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> addDishInMenu(@RequestBody @Valid Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> addDishInMenu(@RequestBody @Valid Dish dish,
+                                              @PathVariable int restaurantId) {
         log.info("create Dish for Restaurant {}", restaurantId);
         checkNew(dish);
         var created = service.save(dish, restaurantId);
@@ -38,7 +40,9 @@ public class AdminMenuController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Valid Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
+    public void update(@RequestBody @Valid Dish dish,
+                       @PathVariable int restaurantId,
+                       @PathVariable int id) {
         log.info("update Dish {} for Restaurant {}", id, restaurantId);
         assureIdConsistent(dish, id);
         service.save(dish, restaurantId);
@@ -46,7 +50,8 @@ public class AdminMenuController {
 
     @DeleteMapping("/{dishId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDishFromMenu(@PathVariable int restaurantId, @PathVariable int dishId) {
+    public void deleteDishFromMenu(@PathVariable int restaurantId,
+                                   @PathVariable int dishId) {
         log.info("delete Dish {} from Restaurant {}", dishId, restaurantId);
         service.deleteDishFromMenu(restaurantId, dishId);
     }

@@ -13,7 +13,8 @@ import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = UserRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = UserRestaurantController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class UserRestaurantController {

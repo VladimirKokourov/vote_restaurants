@@ -19,7 +19,8 @@ public class UserMenuControllerTest extends AbstractControllerTest {
     public static final String REST_URL = "/api/restaurants/" + RESTAURANT1_ID + "/menus";
     public static final String REST_URL_SLASH = REST_URL + '/';
     public static final String REST_URL_SLASH_TODAY = REST_URL_SLASH + "today";
-    public static final String REST_URL_NOT_EXIST_RESTAURANT = "/api/restaurants/" + NOT_EXIST_ENTITY_ID + "/menus/today";
+    public static final String REST_URL_NOT_EXIST_RESTAURANT = "/api/restaurants/"
+            + NOT_EXIST_ENTITY_ID + "/menus/today";
 
 
     @Test

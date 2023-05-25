@@ -15,7 +15,8 @@ import ru.vkokourov.vote_restaurants.to.RestaurantTo;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminRestaurantController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class AdminRestaurantController {
@@ -32,7 +33,8 @@ public class AdminRestaurantController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Valid RestaurantTo restaurantTo, @PathVariable int id) {
+    public void update(@RequestBody @Valid RestaurantTo restaurantTo,
+                       @PathVariable int id) {
         log.info("update Restaurant {}", id);
         service.update(restaurantTo, id);
     }

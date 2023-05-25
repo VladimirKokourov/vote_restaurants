@@ -79,7 +79,9 @@ public class RestExceptionHandler {
         return processException(ex, request, Map.of());
     }
 
-    ProblemDetail processException(@NonNull Exception ex, HttpServletRequest request, Map<String, Object> additionalParams) {
+    ProblemDetail processException(@NonNull Exception ex,
+                                   HttpServletRequest request,
+                                   Map<String, Object> additionalParams) {
         String path = request.getRequestURI();
         Class<? extends Exception> exClass = ex.getClass();
         Optional<ErrorType> optType = HTTP_STATUS_MAP.entrySet().stream()
@@ -93,11 +95,16 @@ public class RestExceptionHandler {
         } else {
             Throwable root = getRootCause(ex);
             log.error(ERR_PFX + "Exception " + root + " at request " + path, root);
-            return createProblemDetail(ex, APP_ERROR, "Exception " + root.getClass().getSimpleName(), additionalParams);
+            return createProblemDetail(ex,
+                    APP_ERROR,
+                    "Exception " + root.getClass().getSimpleName(),
+                    additionalParams);
         }
     }
 
-    private ProblemDetail createProblemDetail(Exception ex, ErrorType type, String defaultDetail, @NonNull Map<String, Object> additionalParams) {
+    private ProblemDetail createProblemDetail(Exception ex,
+                                              ErrorType type, String defaultDetail,
+                                              @NonNull Map<String, Object> additionalParams) {
         ErrorResponse.Builder builder = ErrorResponse.builder(ex, type.status, defaultDetail);
         ProblemDetail pd = builder.build().updateAndGetBody(messageSource, LocaleContextHolder.getLocale());
         additionalParams.forEach(pd::setProperty);
@@ -117,7 +124,12 @@ public class RestExceptionHandler {
     }
 
     private String getErrorMessage(ObjectError error) {
-        return messageSource.getMessage(error.getCode(), error.getArguments(), error.getDefaultMessage(), LocaleContextHolder.getLocale());
+        return messageSource.getMessage(
+                error.getCode(),
+                error.getArguments(),
+                error.getDefaultMessage(),
+                LocaleContextHolder.getLocale()
+        );
     }
 
     //  https://stackoverflow.com/a/65442410/548473

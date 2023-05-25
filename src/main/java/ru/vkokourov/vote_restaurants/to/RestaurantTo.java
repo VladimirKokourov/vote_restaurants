@@ -1,7 +1,6 @@
 package ru.vkokourov.vote_restaurants.to;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
@@ -21,7 +20,8 @@ public class RestaurantTo extends NamedTo {
     @NoHtml
     String address;
 
-    public RestaurantTo(Integer id, String name, String description, String address) {
+    public RestaurantTo(Integer id, String name,
+                        String description, String address) {
         super(id, name);
         this.description = description;
         this.address = address;

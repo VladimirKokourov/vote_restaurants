@@ -62,7 +62,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL_SLASH + GUEST_VOTE_ID))
+        perform(MockMvcRequestBuilders.get(REST_URL_SLASH + VOTE_GUEST_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -78,7 +78,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void deleteDataConflict() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL_SLASH + GUEST_VOTE_ID))
+        perform(MockMvcRequestBuilders.delete(REST_URL_SLASH + VOTE_GUEST_ID))
                 .andExpect(status().isConflict());
     }
 

@@ -23,7 +23,8 @@ public class JsonUtil {
         try {
             return reader.<T>readValues(json).readAll();
         } catch (IOException e) {
-            throw new IllegalArgumentException("Invalid read array from JSON:\n'" + json + "'", e);
+            throw new IllegalArgumentException(
+                    "Invalid read array from JSON:\n'" + json + "'", e);
         }
     }
 

@@ -14,7 +14,8 @@ import ru.vkokourov.vote_restaurants.to.MenuTo;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping(value = UserMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = UserMenuController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class UserMenuController {
@@ -29,7 +30,8 @@ public class UserMenuController {
     }
 
     @GetMapping("/{localDate}")
-    public ResponseEntity<MenuTo> getMenuForToday(@PathVariable int restaurantId, @PathVariable LocalDate localDate) {
+    public ResponseEntity<MenuTo> getMenuForToday(@PathVariable int restaurantId,
+                                                  @PathVariable LocalDate localDate) {
         log.info("get menu of restaurant {} for {}", restaurantId, localDate);
         return ResponseEntity.of(service.getMenuForLocalDate(restaurantId, localDate));
     }

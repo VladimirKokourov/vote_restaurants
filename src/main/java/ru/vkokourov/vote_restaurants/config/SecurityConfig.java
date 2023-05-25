@@ -50,7 +50,8 @@ public class SecurityConfig {
     //  https://stackoverflow.com/a/61147599/548473
     @Bean
     WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers("/", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**");
+        return web -> web.ignoring().
+                requestMatchers("/", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**");
     }
 
     @Bean

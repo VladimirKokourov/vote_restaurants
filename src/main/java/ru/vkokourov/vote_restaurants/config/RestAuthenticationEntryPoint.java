@@ -17,7 +17,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     private final HandlerExceptionResolver resolver;
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) {
         resolver.resolveException(request, response, null, authException);
     }
 }

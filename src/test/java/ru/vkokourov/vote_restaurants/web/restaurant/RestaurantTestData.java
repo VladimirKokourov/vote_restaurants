@@ -7,7 +7,8 @@ import java.util.List;
 
 public class RestaurantTestData {
 
-    public static MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER = MatcherFactory.usingEqualsComparator(RestaurantTo.class);
+    public static MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER =
+            MatcherFactory.usingEqualsComparator(RestaurantTo.class);
 
     public static final int RESTAURANT1_ID = 1;
     public static final int RESTAURANT2_ID = RESTAURANT1_ID + 1;

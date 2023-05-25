@@ -19,7 +19,8 @@ import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.assur
 import static ru.vkokourov.vote_restaurants.util.validation.ValidationUtil.checkNew;
 
 @RestController
-@RequestMapping(value = ProfileController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = ProfileController.REST_URL,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileController extends AbstractUserController {
     static final String REST_URL = "/api/profile";
 
@@ -49,7 +50,8 @@ public class ProfileController extends AbstractUserController {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public void update(@RequestBody @Valid UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
+    public void update(@RequestBody @Valid UserTo userTo,
+                       @AuthenticationPrincipal AuthUser authUser) {
         log.info("update {} with id={}", userTo, authUser.id());
         assureIdConsistent(userTo, authUser.id());
         User user = authUser.getUser();

@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 public class RestaurantUtil {
 
     public static RestaurantTo createTo(Restaurant r) {
-        return new RestaurantTo(r.getId(), r.getName(), r.getDescription(), r.getAddress());
+        return new RestaurantTo(r.getId(), r.getName(),
+                r.getDescription(), r.getAddress());
     }
 
     public static List<RestaurantTo> getTos(Collection<Restaurant> restaurants) {

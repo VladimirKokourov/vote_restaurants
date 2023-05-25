@@ -11,7 +11,8 @@ import ru.vkokourov.vote_restaurants.HasId;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 public abstract class BaseTo implements HasId {
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // https://stackoverflow.com/a/28025008/548473
+    // https://stackoverflow.com/a/28025008/548473
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     protected Integer id;
 
     @Override
