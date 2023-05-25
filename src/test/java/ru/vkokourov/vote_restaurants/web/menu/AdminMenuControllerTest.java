@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.vkokourov.vote_restaurants.web.TestData.NOT_EXIST_ENTITY_ID;
 import static ru.vkokourov.vote_restaurants.web.menu.MenuTestData.*;
 import static ru.vkokourov.vote_restaurants.web.restaurant.RestaurantTestData.RESTAURANT1_ID;
+import static ru.vkokourov.vote_restaurants.web.user.UserTestData.*;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.ADMIN_MAIL;
 import static ru.vkokourov.vote_restaurants.web.user.UserTestData.USER_MAIL;
 
@@ -30,7 +31,7 @@ public class AdminMenuControllerTest extends AbstractControllerTest {
     private DishRepository dishRepository;
 
     @Test
-    @WithUserDetails(value = UserTestData.ADMIN_MAIL)
+    @WithUserDetails(value = ADMIN_MAIL)
     void addDishToMenu() throws Exception {
         final var newDish = getNewDish();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
